@@ -14,6 +14,14 @@ const UserSchema = new Schema<IUser>({
   password: { type: String, required: true },
 });
 
+
+UserSchema.set("toJSON", {
+  transform: (doc, ret) => {
+    delete ret.__v;
+    return ret;
+  },
+});
+
 const User = model<IUser>("User", UserSchema);
 
 export default User;

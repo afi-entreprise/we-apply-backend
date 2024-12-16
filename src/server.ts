@@ -1,7 +1,7 @@
 import express, { Application } from "express";
 import dotenv from "dotenv";
 import connectDB from "./db/db";
-import authRoutes from "./routes/auth";
+import router from "./routes/auth";
 
 dotenv.config();
 
@@ -14,7 +14,7 @@ app.use(express.json());
 connectDB();
 
 // Routes
-app.use("/api/auth", authRoutes);
+app.use(router);
 
 // Port d'écoute
 const PORT = process.env.PORT || 5000;
