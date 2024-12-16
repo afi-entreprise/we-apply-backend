@@ -2,6 +2,11 @@ import mongoose from "mongoose";
 
 const CareerSchema = new mongoose.Schema(
   {
+    userId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+      required: true,
+    },
     JobTitle: { type: String, required: true },
     NumberExperience: { type: Number, required: true },
     CurrentEmployee: { type: String, required: true },

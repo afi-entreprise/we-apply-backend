@@ -25,9 +25,10 @@ export const register = async (req: Request, res: Response): Promise<any> => {
       { expiresIn: "1h" }
     );
 
+    const userId = newUser._id;
     return res
       .status(201)
-      .json({ message: "User created successfully", token });
+      .json({ message: "User created successfully", token, userId });
   } catch (error) {
     return res.status(500).json({ error: error.message });
   }
@@ -55,7 +56,9 @@ export const login = async (req: Request, res: Response): Promise<any> => {
       { expiresIn: "1h" }
     );
 
-    return res.status(200).send({ message: "Login successful", token });
+    const userId = user._id;
+
+    return res.status(200).send({ message: "Login successful", token, userId });
   } catch (error) {
     return res.status(500).json({ error: error.message });
   }
