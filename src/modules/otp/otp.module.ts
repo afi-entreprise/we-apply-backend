@@ -26,6 +26,7 @@ export const verifyOtpCode = async (
   res: Response
 ): Promise<any> => {
   try {
+    console.log(req.body)
     const { email, code } = req.body;
     const result: { message: string; valid: boolean } = await verifyOTP({
       email,
@@ -38,7 +39,7 @@ export const verifyOtpCode = async (
     if (result.valid) {
       return res.status(200).send({ message: "Otp code verified", valid });
     }
-    return res.status(401).send({ message: result.message, valid });
+    return res.status(401).send({ message: "incorrect otp code", valid });
   } catch (error) {
     console.error(error);
     return res.status(500).json({ error });
