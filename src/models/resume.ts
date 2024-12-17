@@ -6,10 +6,10 @@ const ResumeSchema = new mongoose.Schema({
     ref: "User",
     required: true,
   },
-  LinkedinUrl: { type: String, required: true },
-  PortfolioUrl: { type: String, required: false },
-  Resume: { type: String, required: false },
-  CoverLetter: { type: String, required: true },
+  linkedinUrl: { type: String, required: true },
+  portfolioUrl: { type: String, required: false },
+  resume: { type: String, required: false },
+  coverLetter: { type: String, required: true },
 });
 
 ResumeSchema.set("toJSON", {

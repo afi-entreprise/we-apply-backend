@@ -6,14 +6,14 @@ const ProfileSchema = new mongoose.Schema({
     ref: "User",
     required: true,
   },
-  FirstName: { type: String, required: true },
-  LastName: { type: String, required: true },
-  Email: { type: String, required: true },
-  PhoneNumber: { type: String, required: true },
-  Address: { type: String, required: true },
-  BirthDay: { type: Date, required: true },
-  About: { type: String, required: true },
-  PictureUrl: { type: String, required: false },
+  firstName: { type: String, required: true },
+  fastName: { type: String, required: true },
+  email: { type: String, required: true },
+  phoneNumber: { type: String, required: true },
+  address: { type: String, required: true },
+  birthDay: { type: Date, required: true },
+  about: { type: String, required: true },
+  pictureUrl: { type: String, required: false },
 });
 
 ProfileSchema.set("toJSON", {

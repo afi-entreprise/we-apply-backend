@@ -6,10 +6,10 @@ const EducationSchema = new mongoose.Schema({
     ref: "User",
     required: true,
   },
-  EducationLevel: { type: String, required: true },
-  Field: { type: String, required: true },
-  Skills: { type: Array, required: true },
-  Certifications: { type: Array, required: true },
+  educationLevel: { type: String, required: true },
+  field: { type: String, required: true },
+  skills: { type: Array, required: true },
+  certifications: { type: Array, required: true },
   qualification: { type: String, required: false },
 });
 
