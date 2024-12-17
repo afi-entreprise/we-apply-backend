@@ -7,7 +7,7 @@ const router = Router();
 
 export const register = async (req: Request, res: Response): Promise<any> => {
   try {
-    const { fullName, email, password } = req.body;
+    const { fullname, email, password } = req.body;
 
     const existingUser = await User.findOne({ email });
     if (existingUser) {
@@ -16,13 +16,13 @@ export const register = async (req: Request, res: Response): Promise<any> => {
     }
 
     const hashedPassword = await bcrypt.hash(password, 10);
-    const newUser = new User({ fullName, email, password: hashedPassword });
+    const newUser = new User({ fullname, email, password: hashedPassword });
     await newUser.save();
 
     const token = jwt.sign(
       { id: newUser._id, email: newUser.email },
       process.env.JWT_SECRET as string,
-      { expiresIn: "1h" }
+      { expiresIn: "5h" }
     );
 
     const userId = newUser._id;
@@ -53,7 +53,7 @@ export const login = async (req: Request, res: Response): Promise<any> => {
     const token = jwt.sign(
       { id: user._id, email: user.email },
       process.env.JWT_SECRET as string,
-      { expiresIn: "1h" }
+      { expiresIn: "5h" }
     );
 
     const userId = user._id;
