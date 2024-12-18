@@ -15,9 +15,7 @@ app.use(express.json());
 connectDB();
 
 let alloweds = {
-  origin: [
-    "http://localhost:5173",
-  ],
+  origin: [process.env.ORIGIN_1, "http://localhost:5173"],
 };
 
 app.use(
