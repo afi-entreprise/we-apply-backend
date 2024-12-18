@@ -5,15 +5,16 @@ export interface IUser extends Document {
   fullname: string;
   email: string;
   password: string;
+  provider: string;
 }
 
-// Mongoose Schema
+
 const UserSchema = new Schema<IUser>({
   fullname: { type: String, required: true },
   email: { type: String, required: true, unique: true },
   password: { type: String, required: true },
+  provider: { type: String, default: "email" },
 });
-
 
 UserSchema.set("toJSON", {
   transform: (doc, ret) => {

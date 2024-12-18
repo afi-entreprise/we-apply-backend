@@ -15,4 +15,4 @@ const storage = new Storage({
   keyFilename: serviceAccountPath,
 });
 
-export const bucket = storage.bucket(process.env.GCLOUD_BUCKET_NAME!);
+export const bucket = storage.bucket(process.env.GCLOUD_BUCKET_NAME);

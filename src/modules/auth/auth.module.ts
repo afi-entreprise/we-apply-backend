@@ -64,4 +64,35 @@ export const login = async (req: Request, res: Response): Promise<any> => {
   }
 };
 
+export const handleGoogleLogin = async (
+  req: Request,
+  res: Response
+): Promise<any> => {
+  try {
+    console.log(req.body);
+    const { fullname, email, password } = req.body;
+    let user = await User.findOne({ email });
+    if (user) {
+      res.status(400).json({ message: "Email already exists" });
+      return;
+    }
+    user = new User({ fullname, email, password, provider: "google" });
+    user.save();
+    
+    const token = jwt.sign(
+      { id: user._id, email: user.email },
+      process.env.JWT_SECRET as string,
+      { expiresIn: "5h" }
+    );
+
+    const userId = user._id;
+    return res
+      .status(201)
+      .json({ message: "User created successfully", token, userId });
+  } catch (error) {
+    console.error("Error verifying Google token:", error);
+    res.status(401).json({ message: "Invalid Google token" });
+  }
+};
+
 export default router;

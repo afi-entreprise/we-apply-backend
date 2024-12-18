@@ -16,8 +16,7 @@ const CareerSchema = new mongoose.Schema(
     salary: { type: Number, required: true },
     avaibility: { type: Date, required: true },
     status: { type: String, required: true },
-  },
-  { timestamps: true }
+  }
 );
 
 CareerSchema.set("toJSON", {
