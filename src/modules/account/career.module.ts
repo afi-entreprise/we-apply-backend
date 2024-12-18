@@ -4,16 +4,17 @@ import User from "../../models/User";
 
 export const AddCareer = async (req: Request, res: Response): Promise<any> => {
   try {
+    console.log(req.body);
     const {
-      JobTitle,
-      NumberExperience,
-      CurrentEmployee,
-      DesiredJob,
-      Industry,
-      Location,
-      Salary,
-      Avaibility,
-      Status,
+      jobTitle,
+      numberExperience,
+      currentEmployee,
+      desiredJob,
+      industry,
+      location,
+      salary,
+      avaibility,
+      status,
       userId,
     } = req.body;
 
@@ -24,15 +25,15 @@ export const AddCareer = async (req: Request, res: Response): Promise<any> => {
     }
     const newCareer = new Career({
       userId,
-      JobTitle,
-      NumberExperience,
-      CurrentEmployee,
-      DesiredJob,
-      Industry,
-      Location,
-      Salary,
-      Avaibility,
-      Status,
+      jobTitle,
+      numberExperience: parseInt(numberExperience),
+      currentEmployee,
+      desiredJob,
+      industry,
+      location,
+      salary: parseInt(salary),
+      avaibility: new Date(avaibility),
+      status,
     });
     await newCareer.save();
     return res.status(201).json({ message: "Career created successfully" });

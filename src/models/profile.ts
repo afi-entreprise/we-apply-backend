@@ -7,7 +7,7 @@ const ProfileSchema = new mongoose.Schema({
     required: true,
   },
   firstName: { type: String, required: true },
-  fastName: { type: String, required: true },
+  lastName: { type: String, required: true },
   email: { type: String, required: true },
   phoneNumber: { type: String, required: true },
   address: { type: String, required: true },
