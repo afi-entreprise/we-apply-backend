@@ -7,11 +7,12 @@ export const AddEducation = async (
   res: Response
 ): Promise<any> => {
   try {
+    console.log(req.body);
     const {
-      EducationLevel,
-      Field,
-      Skills,
-      Certifications,
+      educationLevel,
+      field,
+      skills,
+      certifications,
       qualification,
       userId,
     } = req.body;
@@ -23,10 +24,10 @@ export const AddEducation = async (
     }
     const newEducation = new Education({
       userId,
-      EducationLevel,
-      Field,
-      Skills,
-      Certifications,
+      educationLevel,
+      field,
+      skills,
+      certifications,
       qualification,
     });
     await newEducation.save();
