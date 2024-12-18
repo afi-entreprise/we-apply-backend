@@ -36,18 +36,18 @@ export const register = async (req: Request, res: Response): Promise<any> => {
 
 export const login = async (req: Request, res: Response): Promise<any> => {
   try {
+    console.log(req.body);
     const { email, password } = req.body;
 
     const user = await User.findOne({ email });
     if (!user) {
-      res.status(400).json({ message: "Invalid email or password" });
-      return;
+      console.log("fail");
+      return res.status(400).send({ message: "Invalid email or password" });
     }
 
     const isPasswordValid = await bcrypt.compare(password, user.password);
     if (!isPasswordValid) {
-      res.status(400).json({ message: "Invalid email or password" });
-      return;
+      return res.status(400).send({ message: "Invalid email or password" });
     }
 
     const token = jwt.sign(
@@ -76,9 +76,15 @@ export const handleGoogleLogin = async (
       res.status(400).json({ message: "Email already exists" });
       return;
     }
-    user = new User({ fullname, email, password, provider: "google" });
+    const hashedPassword = await bcrypt.hash(password, 10);
+    user = new User({
+      fullname,
+      email,
+      password: hashedPassword,
+      provider: "google",
+    });
     user.save();
-    
+
     const token = jwt.sign(
       { id: user._id, email: user.email },
       process.env.JWT_SECRET as string,

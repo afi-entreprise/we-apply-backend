@@ -8,6 +8,12 @@ const router = Router();
 // API AUTHORIZATION
 // router.use(verifyAuthorization);
 
+router
+  .route("/")
+  .get((req: Request, res: Response) =>{
+    res.status(200).send({ message: "server is running..." })}
+  );
+
 router.use("/auth", authRouter);
 router.use("/otp", optRouter);
 router.use("/account", accountRouter);
