@@ -73,7 +73,13 @@ export const handleGoogleLogin = async (
     const { fullname, email, password } = req.body;
     let user = await User.findOne({ email });
     if (user) {
-      res.status(400).json({ message: "Email already exists" });
+      const userId = user._id;
+      const token = jwt.sign(
+        { id: user._id, email: user.email },
+        process.env.JWT_SECRET as string,
+        { expiresIn: "5h" }
+      );
+      res.status(201).json({ message: "Email already exists", token, userId });
       return;
     }
     const hashedPassword = await bcrypt.hash(password, 10);
