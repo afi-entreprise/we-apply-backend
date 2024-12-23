@@ -6,14 +6,15 @@ export interface IUser extends Document {
   email: string;
   password: string;
   provider: string;
+  etat: string;
 }
-
 
 const UserSchema = new Schema<IUser>({
   fullname: { type: String, required: true },
   email: { type: String, required: true, unique: true },
   password: { type: String, required: true },
   provider: { type: String, default: "email" },
+  etat: { type: String, default: "Resume" },
 });
 
 UserSchema.set("toJSON", {

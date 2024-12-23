@@ -36,6 +36,7 @@ export const AddCareer = async (req: Request, res: Response): Promise<any> => {
       status,
     });
     await newCareer.save();
+    await user.updateOne({ etat: "qualification" })
     return res.status(201).json({ message: "Career created successfully" });
   } catch (error) {
     return res.status(500).json({ error: error.message });

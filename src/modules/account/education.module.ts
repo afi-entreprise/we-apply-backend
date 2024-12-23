@@ -31,6 +31,7 @@ export const AddEducation = async (
       qualification,
     });
     await newEducation.save();
+    await user.updateOne({ etat: "dashboard" });
     return res.status(201).json({ message: "Education created successfully" });
   } catch (error) {
     return res.status(500).json({ error: error.message });

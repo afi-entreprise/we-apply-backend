@@ -28,8 +28,10 @@ export const AddResume = async (req: Request, res: Response): Promise<any> => {
       coverLetter,
     });
     await newResume.save();
+    await user.updateOne({ etat: "personalInfo" })
     return res.status(201).json({ message: "Resume created successfully" });
   } catch (error) {
+    console.log(error)
     return res.status(500).json({ error: error.message });
   }
 };

@@ -58,7 +58,7 @@ export const login = async (req: Request, res: Response): Promise<any> => {
 
     const userId = user._id;
 
-    return res.status(200).send({ message: "Login successful", token, userId });
+    return res.status(200).send({ message: "Login successful", token, user });
   } catch (error) {
     return res.status(500).json({ error: error.message });
   }
@@ -79,9 +79,10 @@ export const handleGoogleLogin = async (
         process.env.JWT_SECRET as string,
         { expiresIn: "5h" }
       );
-      res.status(201).json({ message: "Email already exists", token, userId });
+      res.status(201).json({ message: "Email already exists", token, user });
       return;
     }
+
     const hashedPassword = await bcrypt.hash(password, 10);
     user = new User({
       fullname,
@@ -100,7 +101,7 @@ export const handleGoogleLogin = async (
     const userId = user._id;
     return res
       .status(201)
-      .json({ message: "User created successfully", token, userId });
+      .json({ message: "User created successfully", token, user });
   } catch (error) {
     console.error("Error verifying Google token:", error);
     res.status(401).json({ message: "Invalid Google token" });

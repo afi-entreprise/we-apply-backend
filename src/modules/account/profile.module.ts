@@ -44,6 +44,7 @@ export const AddPersonalInfo = async (
     });
 
     await newProfile.save();
+    await user.updateOne({ etat: "career" })
     return res.status(201).json({ message: "Profile created successfully" });
   } catch (error) {
     console.log(error);
